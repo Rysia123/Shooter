@@ -82,6 +82,7 @@ public class Main extends Application {
 
         root.getChildren().addAll(background,shooter, enemy, score, healthBarBig, healthBarSmall, angerBarBig, angerBarSmall);
         score.setFont(Font.font(30));
+        score.setFill(Color.WHITE);
         shooter.setLayoutY(HEIGHT - 250);
         shooter.setLayoutX(10);
 
@@ -89,6 +90,8 @@ public class Main extends Application {
         angerBarBig.setFill(Color.WHITE);
         healthBarSmall.setFill(Color.GREEN);
         angerBarSmall.setFill(Color.RED);
+
+
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
             if (enemyTime == 0) {
@@ -105,8 +108,6 @@ public class Main extends Application {
                 enemy.setLayoutX(WIDTH - 150);
                 calmingTime = 50;
                 turned = false;
-
-
             }
             if(!turned){
                 enemyTime--;
@@ -115,18 +116,25 @@ public class Main extends Application {
 
             else{
                 calmingTime--;
-
-
             }
             //movement
             for (int i = 0; i < water.size(); i++) {
                 ImageView droplet = water.get(i);
-                droplet.setLayoutX(droplet.getLayoutX() + 10);
-                droplet.setLayoutY(droplet.getLayoutX() - 10);
+                droplet.setLayoutX(droplet.getLayoutX() + 20);
+                droplet.setLayoutY(droplet.getLayoutY() - 10);
+                if (detectCollision(enemy, droplet)){
+                    water.remove(droplet);
+                    root.getChildren().remove(droplet);
+                    healthBarSmall.setWidth(healthBarSmall.getWidth() - SIZE/100);
+                    if (detectCollision(enemy, droplet)){
+                        ImageView gameover = new ImageView(new Image("file:gameover.jpg"));
 
+                    }
+                    points++;
+                    score.setText(points + "");
 
+                }
             }
-
 
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -145,17 +153,13 @@ public class Main extends Application {
     public static boolean detectCollision(ImageView enemy, ImageView droplet){
         double[] center1 = {enemy.getLayoutX() + enemy.getFitWidth()/2,enemy.getLayoutY() + enemy.getFitHeight()/2};
         double[] center2 = {droplet.getLayoutX() + droplet.getFitWidth()/2,droplet.getLayoutY() + droplet.getFitHeight()/2};
-        double radious1 = enemy.getFitWidth()/2;
-        double radious2 = enemy.getFitWidth()/2;
-
+        double radious1 = 60;
+        double radious2 = 60;
 
         double dist = Math.sqrt(Math.pow(center1[0] - center2[0], 2) + Math.pow(center1[1] - center2[1], 2));
-        System.out.println(dist);
-        if(radious1 + radious2 > dist){
+        if(radious1 + radious2 >= dist){
            return true;
-
          }
-
 
         return false;
     }
