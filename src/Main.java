@@ -1,12 +1,10 @@
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Circle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
+
+import javax.swing.text.html.ImageView;
+import java.awt.*;
 
 
 public class Main extends Application {
@@ -14,17 +12,7 @@ public class Main extends Application {
 
     static final int WIDTH = 1200;
     static final int HEIGHT = 800;
-    int enemyTime = 10;
-    Circle shooter = new Circle(100, HEIGHT - 100, 70);
-
-    Circle enemy = new Circle(WIDTH - 100, 100, 70);
-    int points = 0;
-    Text score = new Text(WIDTH - 100, HEIGHT - 100, points + "");
-
-
-
-
-
+    static final int STEP = 10;
     public static void main(String[] args) {
         launch(args);
 
@@ -36,15 +24,10 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        root.getChildren().addAll(shooter, enemy, score);
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
-            if(enemyTime == 0){
-
-            }
-        }));
-
-
+       /* Image image = new javafx.scene.image.Image();
+        ImageView iv1 = new ImageView();
+        iv1.setImage(image);
+*/
     }
-
 }
