@@ -1,3 +1,6 @@
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -9,8 +12,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-
+import javafx.util.Duration;
 
 
 public class Main extends Application {
@@ -44,6 +46,7 @@ public class Main extends Application {
 
         enemy.setLayoutY(100);
         enemy.setLayoutX(WIDTH - 150);
+        int enemyTime = 10;
 
         root.getChildren().addAll(shooter, enemy, score, rectangleBig, rectangleSmall);
         score.setFont(Font.font(30));
