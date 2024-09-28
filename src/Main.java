@@ -2,6 +2,8 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -30,13 +32,20 @@ public class Main extends Application {
 
     }
 
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        root.getChildren().addAll(shooter, enemy, score);
+        ImageView background = new ImageView(new Image("file:hotel.png"));
+
+        background.setFitWidth(WIDTH);
+        background.setFitHeight(HEIGHT);
+
+        root.getChildren().addAll(background,shooter, enemy, score);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
             if (enemyTime == 0) {
