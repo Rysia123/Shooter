@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -14,9 +15,18 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main extends Application {
     static AnchorPane root = new AnchorPane();
+
+    List<ImageView> water = new ArrayList<>();
+
+
+
+
 
     static final int WIDTH = 1200;
     static final int HEIGHT = 800;
@@ -51,6 +61,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(root, WIDTH, HEIGHT);
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.SPACE) {
+                shoot();
+            }
+        } );
+
         primaryStage.setScene(scene);
         primaryStage.show();
         scene.setFill(Color.FLORALWHITE);
@@ -96,15 +112,24 @@ public class Main extends Application {
                 calmingTime--;
 
             }
+            //movement
+            for (int i = 0; i < water.size(); i++) {
+                ImageView droplet = water.get(i);
+                droplet.setLayoutX(droplet.getLayoutX() + 10);
+                droplet.setLayoutY(droplet.getLayoutX() - 10);
+            }
 
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }
 
-    public static void shoot(){
-        ImageView bullet = new ImageView(droplets);
+    public void shoot() {
+        ImageView droplet = new ImageView(droplets);
+        root.getChildren().add(droplet);
+        water.add(droplet);
     }
+
 
     public static boolean detectCollision(ImageView enemy, ImageView droplet){
         double[] center1 = {enemy.getX() + enemy.getFitWidth()/2,enemy.getY() + enemy.getFitHeight()/2};
