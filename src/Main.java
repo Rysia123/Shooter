@@ -44,11 +44,15 @@ public class Main extends Application {
         primaryStage.show();
         scene.setFill(Color.FLORALWHITE);
 
+        ImageView background = new ImageView("file:hotel.png");
+        background.setFitHeight(HEIGHT);
+        background.setFitWidth(WIDTH);
+
         enemy.setLayoutY(100);
         enemy.setLayoutX(WIDTH - 150);
         int enemyTime = 10;
 
-        root.getChildren().addAll(shooter, enemy, score, rectangleBig, rectangleSmall);
+        root.getChildren().addAll(background,shooter, enemy, score, rectangleBig, rectangleSmall);
         score.setFont(Font.font(30));
 
         rectangleBig.setFill(Color.WHITE);
