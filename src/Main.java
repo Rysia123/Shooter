@@ -23,7 +23,8 @@ public class Main extends Application {
     Image enemyImage2 = new Image("file:enemy-removebg-preview2.png");
     //Circle enemy = new Circle(WIDTH - 100, 100, 70);
     ImageView enemy = new ImageView(enemyImage);
-    Rectangle rectangle1 = new Rectangle(WIDTH - 300, HEIGHT - 100, 70, 20);
+    Rectangle rectangleSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, 90, 20);
+    Rectangle rectangleBig = new Rectangle(WIDTH - 310, HEIGHT - 110, 110, 40);
 
 
     int points = 0;
@@ -44,10 +45,10 @@ public class Main extends Application {
         enemy.setLayoutY(100);
         enemy.setLayoutX(WIDTH - 150);
 
-        root.getChildren().addAll(shooter, enemy, score, rectangle1);
+        root.getChildren().addAll(shooter, enemy, score, rectangleBig, rectangleSmall);
         score.setFont(Font.font(30));
 
-
+        rectangleBig.setFill(Color.WHITE);
 
     }
 
