@@ -1,3 +1,4 @@
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -52,6 +53,8 @@ public class Main extends Application {
 
             }
         }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 }
 
