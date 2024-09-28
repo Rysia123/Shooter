@@ -30,6 +30,9 @@ public class Main extends Application {
 
 
     int points = 0;
+    int enemyTime = 100;
+    boolean turned = false;
+    int calmingTime = 50;
     Text score = new Text(WIDTH - 100, HEIGHT - 60, points + "");
 
 
@@ -50,7 +53,6 @@ public class Main extends Application {
 
         enemy.setLayoutY(100);
         enemy.setLayoutX(WIDTH - 150);
-        int enemyTime = 10;
 
         root.getChildren().addAll(background,shooter, enemy, score, rectangleBig, rectangleSmall);
         score.setFont(Font.font(30));
@@ -59,8 +61,29 @@ public class Main extends Application {
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
             if (enemyTime == 0) {
+                enemy.setImage(enemyImage2);
+                enemy.setLayoutY(100);
+                enemy.setLayoutX(WIDTH - 200);
+                turned = true;
+                enemyTime = 100;
+            }
+            if (calmingTime == 0) {
+                enemy.setImage(enemyImage);
+                enemy.setLayoutY(100);
+                enemy.setLayoutX(WIDTH - 150);
+                calmingTime = 50;
+                turned = false;
 
             }
+            if(!turned){
+                enemyTime--;
+            }
+
+            else{
+                calmingTime--;
+
+            }
+
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
