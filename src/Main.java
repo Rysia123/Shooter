@@ -52,6 +52,7 @@ public class Main extends Application {
     Rectangle rectangleBig = new Rectangle(WIDTH - 310, HEIGHT - 110, 110, 40);
 
     AudioClip plonkSound = new AudioClip("file:videoplayback_y6EZG5Z.mp3");
+    int health = 100;
 
 
 
@@ -103,7 +104,7 @@ public class Main extends Application {
 
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
-            if (enemyTime == 0) {
+            if (enemyTime <= 0) {
                 enemy.setImage(enemyImage2);
                 enemy.setLayoutY(100);
                 enemy.setLayoutX(WIDTH - 200);
@@ -136,15 +137,20 @@ public class Main extends Application {
                 if (detectCollision(enemy, droplet)){
                     water.remove(droplet);
                     root.getChildren().remove(droplet);
+                    health-= 1;
                     healthBarSmall.setWidth(healthBarSmall.getWidth() - SIZE/100);
-                    if (turned == true){
+                    angerBarSmall.setWidth(angerBarSmall.getWidth() - 20);
+                    enemyTime -= 20;
+                    if (detectCollision(enemy, droplet)){
                         ImageView gameover = new ImageView(new Image("file:gameover.jpg"));
-                        root.getChildren().add(gameover);
-                        gameover.setFitWidth(WIDTH);
-                        gameover.setFitHeight(HEIGHT);
-
-
                     }
+
+                if(health <= 0){
+                    ImageView won = new ImageView(new Image("file:you-win-lettering-pop-art-text-banner_185004-60.avif"));
+                    won.setFitWidth(WIDTH);
+                    won.setFitHeight(HEIGHT);
+                    root.getChildren().add(won);
+                }
                     points++;
                     score.setText(points + "");
 
