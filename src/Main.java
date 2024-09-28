@@ -32,6 +32,10 @@ public class Main extends Application {
     Rectangle angerBarSmall = new Rectangle(WIDTH - 500, HEIGHT - 100, 90, 20);
     Rectangle angerBarBig = new Rectangle(WIDTH - 510, HEIGHT - 110, 110, 40);
 
+    static Image droplets = new Image("file:sweat-droplets-fotor-bg-remover-20240928124641.png");
+    Rectangle rectangleSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, 90, 20);
+    Rectangle rectangleBig = new Rectangle(WIDTH - 310, HEIGHT - 110, 110, 40);
+
 
     int points = 0;
     int enemyTime = 100;
@@ -96,6 +100,13 @@ public class Main extends Application {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+    }
+
+    public static void shoot(){
+        ImageView bullet = new ImageView(droplets);
+
+
+
     }
 }
 
