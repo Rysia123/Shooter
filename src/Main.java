@@ -20,13 +20,17 @@ public class Main extends Application {
 
     static final int WIDTH = 1200;
     static final int HEIGHT = 800;
-    Circle shooter = new Circle(100, HEIGHT - 100, 70);
+   // Circle shooter = new Circle(100, HEIGHT - 100, 70);
     Image enemyImage = new Image("file:enemy-removebg-preview.png");
     Image enemyImage2 = new Image("file:enemy-removebg-preview2.png");
+    Image shooterImage = new Image("file:shooter-removebg-preview.png");
+    ImageView shooter = new ImageView(shooterImage);
     //Circle enemy = new Circle(WIDTH - 100, 100, 70);
     ImageView enemy = new ImageView(enemyImage);
-    Rectangle rectangleSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, 90, 20);
-    Rectangle rectangleBig = new Rectangle(WIDTH - 310, HEIGHT - 110, 110, 40);
+    Rectangle healthBarSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, 90, 20);
+    Rectangle healthBarBig = new Rectangle(WIDTH - 310, HEIGHT - 110, 110, 40);
+    Rectangle angerBarSmall = new Rectangle(WIDTH - 500, HEIGHT - 100, 90, 20);
+    Rectangle angerBarBig = new Rectangle(WIDTH - 510, HEIGHT - 110, 110, 40);
 
 
     int points = 0;
@@ -54,10 +58,15 @@ public class Main extends Application {
         enemy.setLayoutY(100);
         enemy.setLayoutX(WIDTH - 150);
 
-        root.getChildren().addAll(background,shooter, enemy, score, rectangleBig, rectangleSmall);
+        root.getChildren().addAll(background,shooter, enemy, score, healthBarBig, healthBarSmall, angerBarBig, angerBarSmall);
         score.setFont(Font.font(30));
+        shooter.setLayoutY(HEIGHT - 250);
+        shooter.setLayoutX(10);
 
-        rectangleBig.setFill(Color.WHITE);
+        healthBarBig.setFill(Color.WHITE);
+        angerBarBig.setFill(Color.WHITE);
+        healthBarSmall.setFill(Color.GREEN);
+        angerBarSmall.setFill(Color.RED);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(100), event -> {
             if (enemyTime == 0) {
