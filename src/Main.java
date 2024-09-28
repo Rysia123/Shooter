@@ -137,7 +137,7 @@ public class Main extends Application {
                     water.remove(droplet);
                     root.getChildren().remove(droplet);
                     healthBarSmall.setWidth(healthBarSmall.getWidth() - SIZE/100);
-                    if (turned == false){
+                    if (turned == true){
                         ImageView gameover = new ImageView(new Image("file:gameover.jpg"));
                         root.getChildren().add(gameover);
                         gameover.setFitWidth(WIDTH);
