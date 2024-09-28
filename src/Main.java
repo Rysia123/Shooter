@@ -104,9 +104,22 @@ public class Main extends Application {
 
     public static void shoot(){
         ImageView bullet = new ImageView(droplets);
-
-
-
     }
+
+    public static boolean detectCollision(ImageView enemy, ImageView droplet){
+        double[] center1 = {enemy.getX() + enemy.getFitWidth()/2,enemy.getY() + enemy.getFitHeight()/2};
+        double[] center2 = {droplet.getX() + droplet.getFitWidth()/2,droplet.getY() + droplet.getFitHeight()/2};
+        double radious1 = enemy.getFitWidth()/2;
+        double radious2 = enemy.getFitWidth()/2;
+        if(radious1 + radious2 < Math.sqrt(Math.pow(center1[0] - center2[0],2) + Math.pow(center1[1] - center2[1],2))){
+           return true;
+
+         }
+
+
+        return false;
+    }
+
+
 }
 
