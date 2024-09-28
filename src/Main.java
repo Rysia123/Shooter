@@ -30,6 +30,8 @@ public class Main extends Application {
 
     static final int WIDTH = 1200;
     static final int HEIGHT = 800;
+
+    static final int SIZE = 100;
    // Circle shooter = new Circle(100, HEIGHT - 100, 70);
     Image enemyImage = new Image("file:enemy-removebg-preview.png");
     Image enemyImage2 = new Image("file:enemy-removebg-preview2.png");
@@ -37,10 +39,10 @@ public class Main extends Application {
     ImageView shooter = new ImageView(shooterImage);
     //Circle enemy = new Circle(WIDTH - 100, 100, 70);
     ImageView enemy = new ImageView(enemyImage);
-    Rectangle healthBarSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, 90, 20);
-    Rectangle healthBarBig = new Rectangle(WIDTH - 310, HEIGHT - 110, 110, 40);
-    Rectangle angerBarSmall = new Rectangle(WIDTH - 500, HEIGHT - 100, 90, 20);
-    Rectangle angerBarBig = new Rectangle(WIDTH - 510, HEIGHT - 110, 110, 40);
+    Rectangle healthBarSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, SIZE, 20);
+    Rectangle healthBarBig = new Rectangle(WIDTH - 310, HEIGHT - 110, SIZE+20, 40);
+    Rectangle angerBarSmall = new Rectangle(WIDTH - 500, HEIGHT - 100, SIZE, 20);
+    Rectangle angerBarBig = new Rectangle(WIDTH - 510, HEIGHT - 110, SIZE + 20, 40);
 
     static Image droplets = new Image("file:sweat-droplets-fotor-bg-remover-20240928124641.png");
     Rectangle rectangleSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, 90, 20);
@@ -95,6 +97,7 @@ public class Main extends Application {
                 enemy.setLayoutX(WIDTH - 200);
                 turned = true;
                 enemyTime = 100;
+                angerBarSmall.setWidth(SIZE);
             }
             if (calmingTime == 0) {
                 enemy.setImage(enemyImage);
@@ -103,13 +106,16 @@ public class Main extends Application {
                 calmingTime = 50;
                 turned = false;
 
+
             }
             if(!turned){
                 enemyTime--;
+                angerBarSmall.setWidth(angerBarSmall.getWidth() - SIZE/100);
             }
 
             else{
                 calmingTime--;
+
 
             }
             //movement
@@ -117,7 +123,10 @@ public class Main extends Application {
                 ImageView droplet = water.get(i);
                 droplet.setLayoutX(droplet.getLayoutX() + 10);
                 droplet.setLayoutY(droplet.getLayoutX() - 10);
+
+
             }
+
 
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
