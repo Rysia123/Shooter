@@ -135,17 +135,23 @@ public class Main extends Application {
 
     public void shoot() {
         ImageView droplet = new ImageView(droplets);
+        droplet.setLayoutX(shooter.getLayoutX() + 100);
+        droplet.setLayoutY(shooter.getLayoutY() + 50);
         root.getChildren().add(droplet);
         water.add(droplet);
     }
 
 
     public static boolean detectCollision(ImageView enemy, ImageView droplet){
-        double[] center1 = {enemy.getX() + enemy.getFitWidth()/2,enemy.getY() + enemy.getFitHeight()/2};
-        double[] center2 = {droplet.getX() + droplet.getFitWidth()/2,droplet.getY() + droplet.getFitHeight()/2};
+        double[] center1 = {enemy.getLayoutX() + enemy.getFitWidth()/2,enemy.getLayoutY() + enemy.getFitHeight()/2};
+        double[] center2 = {droplet.getLayoutX() + droplet.getFitWidth()/2,droplet.getLayoutY() + droplet.getFitHeight()/2};
         double radious1 = enemy.getFitWidth()/2;
         double radious2 = enemy.getFitWidth()/2;
-        if(radious1 + radious2 < Math.sqrt(Math.pow(center1[0] - center2[0],2) + Math.pow(center1[1] - center2[1],2))){
+
+
+        double dist = Math.sqrt(Math.pow(center1[0] - center2[0], 2) + Math.pow(center1[1] - center2[1], 2));
+        System.out.println(dist);
+        if(radious1 + radious2 > dist){
            return true;
 
          }
