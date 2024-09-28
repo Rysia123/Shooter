@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -15,6 +16,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import javax.sound.sampled.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +51,9 @@ public class Main extends Application {
     Rectangle rectangleSmall = new Rectangle(WIDTH - 300, HEIGHT - 100, 90, 20);
     Rectangle rectangleBig = new Rectangle(WIDTH - 310, HEIGHT - 110, 110, 40);
 
+    AudioClip plonkSound = new AudioClip("file:videoplayback_y6EZG5Z.mp3");
+
+
 
     int points = 0;
     int enemyTime = 100;
@@ -56,12 +62,15 @@ public class Main extends Application {
     Text score = new Text(WIDTH - 100, HEIGHT - 60, points + "");
 
 
+
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.SPACE) {
@@ -98,6 +107,8 @@ public class Main extends Application {
                 turned = true;
                 enemyTime = 100;
                 angerBarSmall.setWidth(SIZE);
+
+                plonkSound.play();
             }
             if (calmingTime == 0) {
                 enemy.setImage(enemyImage);
